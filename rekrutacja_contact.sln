@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "rekrutacja_contact", "rekrutacja_contact\rekrutacja_contact.csproj", "{854281E2-2767-47D4-8B49-AB6A2ABDB519}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactTest", "ContactTest\ContactTest.csproj", "{FD758365-8B6E-4428-BB13-3DF9133633B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{854281E2-2767-47D4-8B49-AB6A2ABDB519}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{854281E2-2767-47D4-8B49-AB6A2ABDB519}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{854281E2-2767-47D4-8B49-AB6A2ABDB519}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{854281E2-2767-47D4-8B49-AB6A2ABDB519}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FD758365-8B6E-4428-BB13-3DF9133633B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD758365-8B6E-4428-BB13-3DF9133633B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD758365-8B6E-4428-BB13-3DF9133633B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD758365-8B6E-4428-BB13-3DF9133633B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

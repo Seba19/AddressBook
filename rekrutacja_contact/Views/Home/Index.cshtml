@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html data-ng-app="ContactBook">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Adress's Book</title>
+
+    @Scripts.Render("~/bundles/angularJS")
+    @Scripts.Render("~/bundles/customJS")
+</head>
+<body>
+
+   
+        <div class="container" style="padding-top:20px;">
+            <div  data-ng-controller="ContactController" class="container">
+                <div ng-show="error" class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+                    <p>{{ error }}</p>
+                </div>
+
+                <p><a data-ng-click="showadd()" href="javascript:;" class="btn btn-primary">Dodaj nowy kontakt</a></p>
+
+                <div class="modal fade" id="contactModel" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                <h4 class="modal-title" id="myModalLabel" ng-hide="editMode">Dodaj kontakt</h4>
+                                <h4 class="modal-title" id="myModalLabel" ng-show="editMode">Edytuj kontakt</h4>
+                            </div>
+                            <div class="modal-body">
+                                <form class="form-horizontal" role="form" name="addform">
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Imię</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.Name" class="form-control" id="title" placeholder="Podaj imię " required title="Enter your name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Nazwisko</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.Surname" class="form-control" id="title" placeholder="Podaj nazwisko " required title="Enter your name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Miasto</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.City" class="form-control" id="title" placeholder="Podaj miasto " required title="Enter your name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Ulica</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.Street" class="form-control" id="title" placeholder="Podaj ulica " required title="Enter your name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Numer domu</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.HouseNumber" class="form-control" id="title" placeholder="Podaj number domu " required title="Enter your name" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Number telefonu</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" data-ng-model="contact.PhoneNumber" class="form-control" id="title" placeholder="Podaj number telefonu " />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="title" class="col-sm-2 control-label">Adres e-mail</label>
+                                        <div class="col-sm-10">
+                                            <input type="email" name="mail" data-ng-model="contact.Mail" class="form-control" id="title" placeholder="Podaj adres e-mail " required  />
+                                            <span ng-show="addform.mail.$error.email">
+                                               Adres e-mail jest nie poprawny
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                        
+                                                <span data-ng-hide="editMode">
+                                                <input type="submit" value="Add" ng-disabled="addform.$invalid" data-ng-click="add()" class="btn btn-primary" />
+                                            </span>
+                                            
+                                            <span data-ng-show="editMode">
+                                                <input type="submit" value="Update" ng-disabled="addform.$invalid" data-ng-click="update()" class="btn btn-primary" />
+                                            </span>
+                                            <input type="button" value="Cancel" data-ng-click="cancel()" class="btn btn-primary" />
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h1>Lista kontaktów </h1>
+                <form class="form-inline">
+                    <input ng-model="query.$" type="text"
+                           placeholder="Wyszukaj " autofocus>
+                    <input ng-model="query.Name" type="text"
+                           placeholder="Wyszukaj imienia" autofocus>
+                    <input ng-model="query.Surname" type="text"
+                           placeholder="Wyszukaj nazwiska" autofocus>
+                    <input ng-model="query.City" type="text"
+                           placeholder="Wyszukaj miasta" autofocus>
+                    </form>
+                    <table class="table table-hover">
+                        <tr>
+                            <th>ID</th>
+                            <th>Imie</th>
+                            <th>Nazwisko</th>
+                            <th>Miasto</th>
+                            <th>Ulica</th>
+                            <th>Numer mieszkania</th>
+                            <th>Numer telefonu</th>
+                            <th>Adres e-mail</th>
+                        </tr>
+
+                        <tr data-ng-repeat="contact in contacts | filter:query">
+                            <td><strong>{{ $index+1 }}</strong></td>
+                            <td>
+                                <p>{{ contact.Name }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.Surname }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.City }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.Street }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.HouseNumber }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.PhoneNumber }}</p>
+
+                            </td>
+                            <td>
+                                <p>{{ contact.Mail }}</p>
+
+                            </td>
+                            <td>
+                                <p>
+                              |
+                                    <a data-ng-click="edit(contact)" href="javascript:;">Edytuj</a> |
+                                    <a data-ng-click="showconfirm(contact)" href="javascript:;">Usuń</a>
+                                </p>
+
+                            </td>
+                        </tr>
+                    </table>
+                    <hr />
+
+                  
+
+                    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button>
+                                    <h4 class="modal-title" id="myModalLabel"></h4>
+                                </div>
+                                <div class="modal-body">
+                                    Czy chcesz usunąć kontakt?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-ng-click="delete()">Ok</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+</div>
+        </div>
+</body>
+</html>
+    
