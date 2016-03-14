@@ -9,7 +9,7 @@ namespace rekrutacja_contact
     public partial class ContactDBModel : DbContext, IDBContext
     {
         public ContactDBModel()
-            : base( "ContactModel")
+            : base()
         {
         }
         public DbSet<Contact> Contacts { get; set; }
